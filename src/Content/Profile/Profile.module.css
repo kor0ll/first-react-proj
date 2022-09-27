@@ -1,0 +1,33 @@
+.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 2rem;
+}
+
+.profile_info {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.wrapper p {
+    font-size: 1.5rem;
+}
+
+.wrapper li {
+    text-align: left;
+    list-style-type: none;
+}
+
+.wrapper ul {
+    margin-left: 0;
+    padding-left: 0;
+}

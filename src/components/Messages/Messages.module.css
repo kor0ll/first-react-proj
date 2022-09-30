@@ -1,0 +1,39 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.dialogs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+    width: 30%;
+}
+.messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    width: 70%;
+    border: 2px solid black;
+}
+
+.dialog_item {
+    color: black;
+    text-decoration: none;
+    padding: 1rem;
+    margin: 0 5px;
+}
+
+.active {
+    color: rgb(118, 100, 0);
+    text-decoration: none;
+    padding: 1rem;
+    margin: 0 5px;
+}
+
+.message {
+    padding: 0.5rem;
+}

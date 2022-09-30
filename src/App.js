@@ -16,8 +16,8 @@ function App() {
         <Nav />
         <div className='content-wrapper'>
           <Routes>
-            <Route path="/profile" element={<MainContent />} />
-            <Route path="/messages" element={<Messages />} />
+            <Route path="/profile*" element={<MainContent />} />
+            <Route path="/messages*" element={<Messages />} />
           </Routes>
         </div>
       </div>

@@ -11,6 +11,10 @@ const Messages = (props) => {
             </div>
             <div className={s.messages}>
                 {props.state.messagesData.map( (m) =>  <Message text={m.text} /> )}
+                <div className={s.post_wrapper}>
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Напишите что-нибудь..."></textarea>
+                    <button>Отправить</button>
+                </div>
             </div>
         </div>
     )

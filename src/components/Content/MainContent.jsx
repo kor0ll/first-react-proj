@@ -2,7 +2,6 @@ import s from "./MainContent.module.css";
 import Post from "./Post/Post";
 import Profile from "./Profile/Profile";
 import React from "react";
-import state from "../../redux/state";
 
 
 
@@ -18,7 +17,6 @@ function MainContent(props) {
     let text = textPost.current.value;
     props.updateNewPostText(text);
   }
-
   return (
     <div className={s.main_content}>
       <img className={s.profile_main_pic} src={props.state.profileInfo.mainPic} alt="profile-pic" />
@@ -29,7 +27,10 @@ function MainContent(props) {
       <p>My posts</p>
 
       <div className={s.post_generator}>
-        <textarea name="" id="" cols="30" rows="10" placeholder="Напишите что-нибудь..." ref={textPost} onChange={changeNewPostText} value={state.profilePage.newPostText}/>
+        <textarea name="" id="" cols="30" rows="10" placeholder="Напишите что-нибудь..." ref={textPost} 
+        onChange={changeNewPostText} 
+        value={props.state.newPostText}/>
+
         <button onClick={sendNewPost}>Создать новый пост</button>
       </div>
 

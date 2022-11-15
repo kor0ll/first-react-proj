@@ -1,21 +1,20 @@
 import reportWebVitals from './reportWebVitals';
-import state from "./redux/state";
-import { callbackFunc, newPost, updateNewPostText } from './redux/state';
+import store from './redux/state';
 import App from "./App";
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 export const root = ReactDOM.createRoot(document.getElementById('root'));
-const rerenderEntireTree = (my_root, state) => {    
+const rerenderEntireTree = (my_root) => {    
     my_root.render(
         <React.StrictMode>
-            <App state={state} newPost={newPost} updateNewPostText={updateNewPostText}/>
+            <App state={store.getState()} newPost={store.newPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>
         </React.StrictMode>
     );
 }
-rerenderEntireTree(root,state);
+rerenderEntireTree(root);
 
-callbackFunc(rerenderEntireTree);
+store.subscriber(rerenderEntireTree);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

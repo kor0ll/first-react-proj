@@ -5,7 +5,6 @@ import Nav from './components/Nav/Nav';
 import MainContent from './components/Content/MainContent';
 import Messages from './components/Messages/Messages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import store from './redux/state';
 
 
 
@@ -20,8 +19,7 @@ function App(props) {
             <Routes>
               <Route path="/profile*" element={<MainContent
                 state={props.state.profilePage}
-                newPost={props.newPost}
-                updateNewPostText={props.updateNewPostText} />} />
+                dispatch={props.dispatch} />} />
               <Route path="/messages*" element={<Messages state={props.state.messagesPage} />} />
             </Routes>
           </div>

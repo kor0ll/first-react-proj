@@ -2,6 +2,9 @@ import s from "./MainContent.module.css";
 import Post from "./Post/Post";
 import Profile from "./Profile/Profile";
 import React from "react";
+import {addPostAC, updateNewPostTextAC} from "./../../redux/state";
+
+
 
 
 
@@ -10,12 +13,12 @@ function MainContent(props) {
   let textPost = React.createRef();
 
   let sendNewPost = () => {
-    props.newPost();
+    props.dispatch(addPostAC());
   };
 
   let changeNewPostText = () => {
     let text = textPost.current.value;
-    props.updateNewPostText(text);
+    props.dispatch(updateNewPostTextAC(text));
   }
   return (
     <div className={s.main_content}>

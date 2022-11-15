@@ -8,7 +8,7 @@ export const root = ReactDOM.createRoot(document.getElementById('root'));
 const rerenderEntireTree = (my_root) => {    
     my_root.render(
         <React.StrictMode>
-            <App state={store.getState()} newPost={store.newPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>
+            <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>
     );
 }

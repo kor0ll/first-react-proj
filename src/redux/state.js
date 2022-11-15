@@ -1,5 +1,8 @@
 import {root} from "./../index";
 
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 let store = {
     _state: {
         profilePage: {
@@ -58,7 +61,31 @@ let store = {
     updateNewPostText(text) {
         this._state.profilePage.newPostText = text;
         this._rerenderEntireTree(root);
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            this.newPost();
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this.updateNewPostText(action.newText);
+        } else {
+            alert('Неизвестный Action: ' + action.type);
+        }
     }
 };
+
+export const addPostAC = () => {
+    let action = {
+        type: ADD_POST
+    }
+    return action;
+}
+export const updateNewPostTextAC = (text) => {
+    let action = {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }
+    return action;
+}
 
 export default store;

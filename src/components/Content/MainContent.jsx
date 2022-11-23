@@ -2,7 +2,7 @@ import s from "./MainContent.module.css";
 import Post from "./Post/Post";
 import Profile from "./Profile/Profile";
 import React from "react";
-import {addPostAC, updateNewPostTextAC} from "./../../redux/state";
+import {addPostAC, updateNewPostTextAC} from "./../../redux/profileReducer";
 
 
 

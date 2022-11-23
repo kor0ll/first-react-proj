@@ -1,7 +1,6 @@
 import {root} from "./../index";
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+import messagesReducer from "./messagesReducer";
+import profileReducer from "./profileReducer";
 
 let store = {
     _state: {
@@ -33,7 +32,8 @@ let store = {
                 { id: 3, text: 'Yoy' },
                 { id: 4, text: 'Yo' },
                 { id: 5, text: 'Oleg ti dolbaeb' },
-            ]
+            ],
+            newMessageText: ''
         }
     },
     _rerenderEntireTree() {
@@ -47,45 +47,12 @@ let store = {
         this._rerenderEntireTree = observer;
     },
 
-    newPost() {
-        let post = {
-            id: this._state.profilePage.postsData.length + 1,
-            message: this._state.profilePage.newPostText
-        };
-        this._state.profilePage.postsData.push(post);
-        //clear textarea for new post
-        this._state.profilePage.newPostText = "";
-        //rerender dom
-        this._rerenderEntireTree(root, this._state);
-    },
-    updateNewPostText(text) {
-        this._state.profilePage.newPostText = text;
-        this._rerenderEntireTree(root);
-    },
-
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            this.newPost();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this.updateNewPostText(action.newText);
-        } else {
-            alert('Неизвестный Action: ' + action.type);
-        }
+        this._state.messagesPage = messagesReducer(this._state.messagesPage, action);
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        console.log("После reducer: " + this._state.messagesPage.newMessageText);
+        this._rerenderEntireTree(root);
     }
 };
-
-export const addPostAC = () => {
-    let action = {
-        type: ADD_POST
-    }
-    return action;
-}
-export const updateNewPostTextAC = (text) => {
-    let action = {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    }
-    return action;
-}
 
 export default store;

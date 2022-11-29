@@ -1,4 +1,5 @@
 import s from "./Profile.module.css";
+import React from 'react';
 
 function Profile(props) {
     return (

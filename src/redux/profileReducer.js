@@ -1,4 +1,19 @@
-const profileReducer = (state, action) => {
+let initialState = {
+    profileInfo: {
+        mainPic: "https://images.wallpaperscraft.ru/image/single/most_kamni_reka_gorod_gorod_na_vode_otrazhenie_58661_2560x1600.jpg",
+        avatarPic: "https://cyberofsport.com/wp-content/uploads/2022/02/mgidarccontentnick.comc008fa9d_d.0.jpg",
+        name: 'Oleg Korolev',
+        age: 21,
+        town: 'Moskow'
+    },
+    postsData: [
+        { id: 1, message: "Hi, how are you?" },
+        { id: 2, message: "This is my first post!" }
+    ],
+    newPostText: "Write something"
+};
+
+const profileReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'ADD-POST': {
             let post = {

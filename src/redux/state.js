@@ -36,22 +36,21 @@ let store = {
             newMessageText: ''
         }
     },
-    _rerenderEntireTree() {
+    _callSubscriber() {
         console.log("Changed"); //заглушка, настоящая функция передается ниже
     },
 
     getState() {
         return this._state;
     },
-    subscriber(observer) {
-        this._rerenderEntireTree = observer;
+    subscribe(observer) {
+        this._callSubscriber = observer;
     },
 
     dispatch(action) {
         this._state.messagesPage = messagesReducer(this._state.messagesPage, action);
         this._state.profilePage = profileReducer(this._state.profilePage, action);
-        console.log("После reducer: " + this._state.messagesPage.newMessageText);
-        this._rerenderEntireTree(root);
+        this._callSubscriber(root, this._state);
     }
 };
 

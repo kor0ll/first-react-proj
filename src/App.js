@@ -5,6 +5,7 @@ import Nav from './components/Nav/Nav';
 import MainContent from './components/Content/MainContent';
 import Messages from './components/Messages/Messages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from 'react';
 
 
 

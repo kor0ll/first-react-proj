@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import MainContent from './components/Content/MainContent';
 import Messages from './components/Messages/Messages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from 'react';
+import MainContentContainer from './components/Content/MainContentContainer';
+import MessagesContainer from './components/Messages/MessagesContainer';
 
 
 
@@ -18,10 +18,8 @@ function App(props) {
           <Nav />
           <div className='content-wrapper'>
             <Routes>
-              <Route path="/profile*" element={<MainContent
-                state={props.state.profilePage}
-                dispatch={props.dispatch} />} />
-              <Route path="/messages*" element={<Messages state={props.state.messagesPage} dispatch={props.dispatch} />} />
+              <Route path="/profile*" element={<MainContentContainer store={props.store} />} />
+              <Route path="/messages*" element={<MessagesContainer store={props.store} />} />
             </Routes>
           </div>
         </div>

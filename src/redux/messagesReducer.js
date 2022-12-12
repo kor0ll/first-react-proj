@@ -23,13 +23,22 @@ const messagesReducer = (state = initialState, action) => {
                 id: state.messagesData.length + 1,
                 text: state.newMessageText
             };
-            state.messagesData.push(message);
-            state.newMessageText = '';
-            return state;
+            //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
+            //а на новый объект
+            let stateCopy = {...state};
+            stateCopy.messagesData = [...state.messagesData];
+
+            stateCopy.messagesData.push(message);
+            stateCopy.newMessageText = '';
+            return stateCopy;
         }
         case 'UPDATE-NEW-MESSAGE-TEXT': {
-            state.newMessageText = action.newText;
-            return state;
+            //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
+            //а на новый объект
+            let stateCopy = {...state};
+
+            stateCopy.newMessageText = action.newText;
+            return stateCopy;
         }
         default: {
             return state;

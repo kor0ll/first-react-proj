@@ -18,8 +18,8 @@ function App(props) {
           <Nav />
           <div className='content-wrapper'>
             <Routes>
-              <Route path="/profile*" element={<MainContentContainer store={props.store} />} />
-              <Route path="/messages*" element={<MessagesContainer store={props.store} />} />
+              <Route path="/profile*" element={<MainContentContainer />} />
+              <Route path="/messages*" element={<MessagesContainer />} />
             </Routes>
           </div>
         </div>

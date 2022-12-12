@@ -20,15 +20,25 @@ const profileReducer = (state = initialState, action) => {
                 id: state.postsData.length + 1,
                 message: state.newPostText
             };
-            state.postsData.push(post);
-            state.newPostText = "";
-            return state;
+            //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
+            //а на новый объект
+            let stateCopy = {...state};
+            stateCopy.postsData = [...state.postsData];
+
+            stateCopy.postsData.push(post);
+            stateCopy.newPostText = "";
+            return stateCopy;
         }
         case 'UPDATE-NEW-POST-TEXT': {
-            state.newPostText = action.newText;
-            return state;
+            //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
+            //а на новый объект
+            let stateCopy = {...state};
+
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
         }
         default: {
+            //тут ничего копировать не нужно, потому что и перерисовка нам не нужна
             return state;
         }
     }

@@ -1,11 +1,11 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import Messages from './components/Messages/Messages';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from 'react';
 import MainContentContainer from './components/Content/MainContentContainer';
 import MessagesContainer from './components/Messages/MessagesContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 
 
@@ -20,6 +20,7 @@ function App(props) {
             <Routes>
               <Route path="/profile*" element={<MainContentContainer />} />
               <Route path="/messages*" element={<MessagesContainer />} />
+              <Route path='/users*' element={<UsersContainer />} />
             </Routes>
           </div>
         </div>

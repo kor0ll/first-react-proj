@@ -21,7 +21,7 @@ function MainContent(props) {
       <Profile avatar={props.profileInfo.avatarPic}
         name={props.profileInfo.name}
         age={props.profileInfo.age}
-        town={props.profileInfo.town} />
+        town={props.profileInfo.town}/>
       <p>My posts</p>
 
       <div className={s.post_generator}>
@@ -34,7 +34,7 @@ function MainContent(props) {
 
       <div className="all-posts">
         {
-          props.postsData.map((p) => <Post avatar={props.profileInfo.avatarPic} message={p.message} />)
+          props.postsData.map((p) => <Post key={p.id} avatar={props.profileInfo.avatarPic} message={p.message} />)
         }
       </div>
     </div>

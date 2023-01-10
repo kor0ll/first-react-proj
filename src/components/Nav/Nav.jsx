@@ -7,6 +7,7 @@ function Nav() {
         <nav>
           <NavLink to="/profile" className = { navData => navData.isActive ? s.active : s.item }>Profile</NavLink>
           <NavLink to="/messages" className = { navData => navData.isActive ? s.active : s.item }>Messages</NavLink>
+          <NavLink to="/users" className = { navData => navData.isActive ? s.active : s.item }>Users</NavLink>
           <a>News</a>
           <a>Music</a>
           <a>Settings</a>

@@ -2,3 +2,23 @@
     height: 100px;
     width: 100px;
 }
+
+.wrapper {
+    display: block;
+    margin: 10px;
+    text-align: left;
+}
+
+.textwrapper {
+    display: inline-block;
+    margin: 1rem;
+}
+
+span {
+    display: inline-block;
+}
+
+.pic_wrapper {
+    text-align: center;
+}
+

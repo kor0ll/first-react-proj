@@ -40,7 +40,7 @@ const usersReducer = (state = initialState, action) => {
         }
         case SET_USERS: {
             //на будущее
-            let newstate = {...state, users: [...state.users, ...action.users]};
+            let newstate = {...state, users: action.users};
             return newstate;
         }
         default: {

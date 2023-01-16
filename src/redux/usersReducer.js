@@ -1,9 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 let initialState = {
-    users: []
+    users: [],
+    pageSize: 5, 
+    totalUsersCount: 50,
+    currentPage: 1
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -43,6 +48,15 @@ const usersReducer = (state = initialState, action) => {
             let newstate = {...state, users: action.users};
             return newstate;
         }
+        case SET_CURRENT_PAGE: {
+            let newstate = {...state, currentPage: action.currentPage}
+            return newstate;
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            let newstate = {...state, totalUsersCount: action.totalCount}
+            return newstate;
+        }
+
         default: {
             //тут ничего копировать не нужно, потому что и перерисовка нам не нужна
             return state;
@@ -69,6 +83,20 @@ export const setUsersAC = (users) => {
     let action = {
         type: SET_USERS, 
         users: users
+    }
+    return action;
+}
+export const selectPageAC = (page) => {
+    let action = {
+        type: SET_CURRENT_PAGE,
+        currentPage: page
+    }
+    return action;
+}
+export const setTotalUsersCountAC = (totalCount) => {
+    let action = {
+        type: SET_TOTAL_USERS_COUNT,
+        totalCount: totalCount
     }
     return action;
 }

@@ -22,3 +22,13 @@ span {
     text-align: center;
 }
 
+.pageDiv {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0.1rem;
+}
+
+.selectedItem {
+    font-weight: bold;
+}
+

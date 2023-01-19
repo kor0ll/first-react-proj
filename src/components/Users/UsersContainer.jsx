@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, selectPageAC, setTotalUsersCountAC, setUsersAC, toggleIsFetchingAC, unfollowAC } from '../../redux/usersReducer';
+import { follow, setTotalUsersCount,selectPage, setUsers, toggleIsFetching, unfollow } from '../../redux/usersReducer';
 import Users from './Users';
 import axios from 'axios';
 import Preloader from '../common/Preloader/Preloader';
@@ -22,7 +22,7 @@ class UsersAPIComponent extends React.Component {
     }
 
     onPageChanged = (page) => {
-        this.props.setCurrentPage(page);
+        this.props.selectPage(page);
         this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
         .then(response => {
@@ -51,7 +51,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
+/*let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userID) => {
             dispatch(followAC(userID));
@@ -73,6 +73,6 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 }
+*/
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+export default connect(mapStateToProps, {follow, unfollow, setUsers, selectPage, setTotalUsersCount, toggleIsFetching})(UsersAPIComponent);

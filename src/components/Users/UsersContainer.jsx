@@ -5,8 +5,6 @@ import Users from './Users';
 import axios from 'axios';
 import Preloader from '../common/Preloader/Preloader';
 
-
-
 class UsersAPIComponent extends React.Component {
 
     componentDidMount = () => {

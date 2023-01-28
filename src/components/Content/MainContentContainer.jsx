@@ -1,46 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
-import {addPostAC, updateNewPostTextAC} from "../../redux/profileReducer";
+import {addPost, updateNewPostText, getProfile} from "../../redux/profileReducer";
 import MainContent from "./MainContent";
+import axios from "axios";
 
+class MainContentContainer extends React.Component {
 
+  componentDidMount = () => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        .then(response => {
+            this.props.getProfile(response.data);
+        })
+  }
 
-
-
-// function MainContentContainer(props) {
-
-//   let state = props.store.getState();
-
-//   let sendNewPost = () => {
-//     props.store.dispatch(addPostAC());
-//   };
-
-//   let changeNewPostText = (text) => {
-//     props.store.dispatch(updateNewPostTextAC(text));
-//   }
-//   return (
-//     <MainContent updateNewPostText={changeNewPostText} addPost={sendNewPost} newPostText={state.profilePage.newPostText}
-//     profileInfo={state.profilePage.profileInfo} postsData={state.profilePage.postsData}/>
-//   )
-// };
+  render = () => {
+    return <MainContent { ...this.props } />
+  }
+}
 
 let mapStateToProps = (state) => {
   return {
     newPostText: state.profilePage.newPostText,
-    profileInfo: state.profilePage.profileInfo,
+    profile: state.profilePage.profile,
     postsData: state.profilePage.postsData
   }
 }
-let mapDispatchToProps = (dispatch) => {
-  return {
-    updateNewPostText: (text) => {
-      return dispatch(updateNewPostTextAC(text))
-    },
-    addPost: () => {
-      return dispatch(addPostAC())
-    }
-  }
-}
-const MainContentContainer = connect(mapStateToProps, mapDispatchToProps)(MainContent);
 
-export default MainContentContainer;
+
+
+export default connect(mapStateToProps, {addPost, updateNewPostText, getProfile} )(MainContentContainer);

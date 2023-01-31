@@ -6,4 +6,10 @@
   .header_img {
     width: 50px;
   }
+
+.login {
+  float: right;
+  color: white;
+  margin: 1rem;
+}
   

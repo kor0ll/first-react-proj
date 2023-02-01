@@ -2,7 +2,6 @@ import s from "./Header.module.css";
 import React from 'react';
 import logo from './../../assets/images/logo.png';
 import { NavLink } from "react-router-dom";
-import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
 
 
 

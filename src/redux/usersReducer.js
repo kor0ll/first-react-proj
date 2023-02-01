@@ -24,7 +24,7 @@ const usersReducer = (state = initialState, action) => {
                 //ненужный нам user копироваться не будет, но на нужном будет меняться isfollowed и происходить копия
                 users: state.users.map( u => {
                     if (u.id === action.userID) {
-                        return {...u, isfollowed: true}
+                        return {...u, followed: true}
                     }
                     return u;
                 })
@@ -39,7 +39,7 @@ const usersReducer = (state = initialState, action) => {
                 //ненужный нам user копироваться не будет, но на нужном будет меняться isfollowed и происходить копия
                 users: state.users.map( u => {
                     if (u.id === action.userID) {
-                        return {...u, isfollowed: false}
+                        return {...u, followed: false}
                     }
                     return u;
                 })

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import {addPost, updateNewPostText, getProfile} from "../../redux/profileReducer";
 import MainContent from "./MainContent";
-import axios from "axios";
+import { ProfileAPI } from "../../api/api";
 
 class MainContentContainer extends React.Component {
 
@@ -13,10 +13,9 @@ class MainContentContainer extends React.Component {
     if (userId === "") {
       userId = '2';
     }
-
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-        .then(response => {
-            this.props.getProfile(response.data);
+    ProfileAPI.getProfile(userId)
+        .then(data => {
+            this.props.getProfile(data);
         })
   }
 

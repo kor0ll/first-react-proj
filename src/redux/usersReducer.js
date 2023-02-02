@@ -4,6 +4,7 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const FOLLOWING_IS_FETCHING = 'FOLLOWING_IS_FETCHING';
 
 //набор переменные доступных в state
 let initialState = {
@@ -12,6 +13,7 @@ let initialState = {
     totalUsersCount: 50,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -63,6 +65,22 @@ const usersReducer = (state = initialState, action) => {
             let newstate = {...state, isFetching: action.isFetching}
             return newstate;
         }
+        case FOLLOWING_IS_FETCHING: {
+
+            let newArray = [];
+            //если isFetching true, значит пользователь нажал на подписку, добавляем в массив id пользователя, на котором была нажата кнопка
+            if (action.isFetching) {
+                newArray = [...state.followingInProgress, action.userId]
+            }
+            //если false, то удаляем из массива этот id через метод filter
+            else {
+                newArray = [...state.followingInProgress.filter(id => id!= action.userId) ]
+            }
+
+            let newstate = {...state, followingInProgress: newArray}
+            return newstate;
+        }
+
 
         default: {
             //тут ничего копировать не нужно, потому что и перерисовка нам не нужна
@@ -111,6 +129,15 @@ export const toggleIsFetching = (isFetching) => {
     let action = {
         type: TOGGLE_IS_FETCHING,
         isFetching: isFetching
+    }
+    return action;
+}
+
+export const followingIsFetching = (isFetching, userId) => {
+    let action = {
+        type: FOLLOWING_IS_FETCHING,
+        isFetching: isFetching,
+        userId: userId
     }
     return action;
 }

@@ -1,3 +1,5 @@
+import { UsersAPI } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -90,14 +92,14 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const follow = (id) => {
+export const followSuccess = (id) => {
     let action = {
         type: FOLLOW,
         userID: id
     }
     return action;
 }
-export const unfollow = (id) => {
+export const unfollowSuccess = (id) => {
     let action = {
         type: UNFOLLOW,
         userID: id
@@ -132,7 +134,6 @@ export const toggleIsFetching = (isFetching) => {
     }
     return action;
 }
-
 export const followingIsFetching = (isFetching, userId) => {
     let action = {
         type: FOLLOWING_IS_FETCHING,
@@ -140,6 +141,47 @@ export const followingIsFetching = (isFetching, userId) => {
         userId: userId
     }
     return action;
+}
+
+//в санках используют замыкания, чтобы передать функции параметры извне. Засунуть их в саму функцию невозможно, потому что
+//мы передаем фукнцию как коллбэк, не вызывая ее
+export const getUsersThunk = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(selectPage(currentPage));
+        dispatch(toggleIsFetching(true));
+        UsersAPI.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            //строка ниже позволяет рассчитывать количество страниц исходя из того, сколько пользователей пришло с сервера
+            //так как их там слишком много, строка будет закомментирована, хардкодом подставлено значение 10, если что меняй в usersReducer
+            //setTotalUsersCount(response.data.totalCount);
+        })
+    }
+}
+
+export const unfollowThunk = (id) => {
+    return (dispatch) => {
+        dispatch(followingIsFetching(true, id));
+        UsersAPI.unfollow(id).then(data => {
+            if (data.resultCode == 0) {
+                dispatch(unfollowSuccess(id));
+            }
+            dispatch(followingIsFetching(false, id));
+        })
+    }
+}
+
+export const followThunk = (id) => {
+    return (dispatch) => {
+        dispatch(followingIsFetching(true, id));
+        UsersAPI.follow(id).then(data => {
+            if (data.resultCode == 0) {
+                dispatch(followSuccess(id));
+            }
+            dispatch(followingIsFetching(false, id));
+        })
+    }
 }
 
 export default usersReducer;

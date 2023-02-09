@@ -76,7 +76,7 @@ const usersReducer = (state = initialState, action) => {
             }
             //если false, то удаляем из массива этот id через метод filter
             else {
-                newArray = [...state.followingInProgress.filter(id => id!= action.userId) ]
+                newArray = [...state.followingInProgress.filter(id => id != action.userId) ]
             }
 
             let newstate = {...state, followingInProgress: newArray}

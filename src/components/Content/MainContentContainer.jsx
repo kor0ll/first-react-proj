@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import {addPost, updateNewPostText, getProfile} from "../../redux/profileReducer";
+import {addPost, updateNewPostText, getProfile, getProfileThunk} from "../../redux/profileReducer";
 import MainContent from "./MainContent";
-import { ProfileAPI } from "../../api/api";
 
 class MainContentContainer extends React.Component {
 
@@ -13,10 +12,8 @@ class MainContentContainer extends React.Component {
     if (userId === "") {
       userId = '2';
     }
-    ProfileAPI.getProfile(userId)
-        .then(data => {
-            this.props.getProfile(data);
-        })
+
+    this.props.getProfileThunk(userId);
   }
 
   render = () => {
@@ -28,10 +25,11 @@ let mapStateToProps = (state) => {
   return {
     newPostText: state.profilePage.newPostText,
     profile: state.profilePage.profile,
-    postsData: state.profilePage.postsData
+    postsData: state.profilePage.postsData,
+    isAuth: state.auth.isAuth
   }
 }
 
 
 
-export default connect(mapStateToProps, {addPost, updateNewPostText, getProfile} )(MainContentContainer);
+export default connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk} )(MainContentContainer);

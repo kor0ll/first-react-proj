@@ -3,10 +3,15 @@ import Profile from "./Profile/Profile";
 import React from "react";
 import Posts from "./Posts/Posts";
 import Preloader from "../common/Preloader/Preloader";
+import { Navigate } from "react-router-dom";
 
 function MainContent(props) {
   if (!props.profile) {
     return <Preloader />
+  }
+
+  if (!props.isAuth) {
+    return <Navigate to='/login'/>
   }
 
   return (

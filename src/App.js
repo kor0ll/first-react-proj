@@ -6,6 +6,7 @@ import MainContentContainer from './components/Content/MainContentContainer';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
 
 
 
@@ -21,6 +22,7 @@ function App(props) {
               <Route path="/profile*" element={<MainContentContainer />} />
               <Route path="/messages*" element={<MessagesContainer />} />
               <Route path='/users*' element={<UsersContainer />} />
+              <Route path='/login*' element={<Login />} />
             </Routes>
           </div>
         </div>

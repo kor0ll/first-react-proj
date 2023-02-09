@@ -2,6 +2,7 @@ import s from "./Messages.module.css";
 import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 
 const Messages = (props) => {
@@ -16,17 +17,22 @@ const Messages = (props) => {
         props.updateNewMessageText(text);
     }
 
+    if (!props.isAuth) {
+        return <Navigate to='/login' />
+    }
+
+
     return (
         <div className={s.wrapper}>
             <div className={s.dialogs}>
-                {props.dialogsData.map( (d) =>  <Dialog id={d.id} name={d.name} /> )}
+                {props.dialogsData.map((d) => <Dialog id={d.id} name={d.name} />)}
             </div>
             <div className={s.messages}>
-                {props.messagesData.map( (m) =>  <Message text={m.text} /> )}
+                {props.messagesData.map((m) => <Message text={m.text} />)}
                 <div className={s.post_wrapper}>
-                    <textarea cols="30" rows="10" placeholder="Напишите что-нибудь..." ref={ textMessage } 
-                    onChange={ updateMessageText } value={props.newMessageText}></textarea>
-                    <button onClick={ addNewMessage }>Отправить</button>
+                    <textarea cols="30" rows="10" placeholder="Напишите что-нибудь..." ref={textMessage}
+                        onChange={updateMessageText} value={props.newMessageText}></textarea>
+                    <button onClick={addNewMessage}>Отправить</button>
                 </div>
             </div>
         </div>

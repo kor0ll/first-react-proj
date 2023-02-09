@@ -1,3 +1,5 @@
+import { ProfileAPI } from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const GET_PROFILE = 'GET-PROFILE';
@@ -65,6 +67,13 @@ export const getProfile = (profile) => {
         profile: profile
     }
     return action;
+}
+
+export const getProfileThunk = (userId) => (dispatch) => {
+    ProfileAPI.getProfile(userId)
+        .then(data => {
+            dispatch(getProfile(data));
+        })
 }
 
 export default profileReducer;

@@ -3,22 +3,7 @@ import React from "react";
 import Messages from "./Messages";
 import { connect } from "react-redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
-
-
-// const MessagesContainer = (props) => {
-
-//     let state = props.store.getState().messagesPage;
-
-//     let addNewMessage = () => {
-//         props.store.dispatch(addMessageAC());
-//     }
-//     let updateMessageText = (text) => {
-//         props.store.dispatch(updateNewMessageTextAC(text));
-//     }
-
-//     return <Messages addMessage={addNewMessage} updateNewMessageText={updateMessageText} 
-//     newMessageText={state.newMessageText} messagesData={state.messagesData} dialogsData={state.dialogsData}/>
-// }
+import { compose } from "redux";
 
 let mapStateToProps = (state) => {
     return {
@@ -39,8 +24,9 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let withAuthMessagesComponent = withAuthRedirect(Messages);
-
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthMessagesComponent);
+const MessagesContainer = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Messages);
 
 export default MessagesContainer;

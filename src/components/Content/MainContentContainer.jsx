@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect.jsx";
 import {addPost, updateNewPostText, getProfileThunk} from "../../redux/profileReducer";
 import MainContent from "./MainContent";
@@ -30,7 +31,7 @@ let mapStateToProps = (state) => {
   }
 }
 
-let withAuthProfileComponent = withAuthRedirect(MainContentContainer);
-
-
-export default connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk} )(withAuthProfileComponent);
+export default compose(
+  connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk}),
+  withAuthRedirect
+)(MainContentContainer);

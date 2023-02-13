@@ -17,9 +17,7 @@ const Messages = (props) => {
         props.updateNewMessageText(text);
     }
 
-    if (!props.isAuth) {
-        return <Navigate to='/login' />
-    }
+    
 
 
     return (

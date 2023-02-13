@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import {addPost, updateNewPostText, getProfile, getProfileThunk} from "../../redux/profileReducer";
+import withAuthRedirect from "../../hoc/withAuthRedirect.jsx";
+import {addPost, updateNewPostText, getProfileThunk} from "../../redux/profileReducer";
 import MainContent from "./MainContent";
 
 class MainContentContainer extends React.Component {
@@ -26,10 +27,10 @@ let mapStateToProps = (state) => {
     newPostText: state.profilePage.newPostText,
     profile: state.profilePage.profile,
     postsData: state.profilePage.postsData,
-    isAuth: state.auth.isAuth
   }
 }
 
+let withAuthProfileComponent = withAuthRedirect(MainContentContainer);
 
 
-export default connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk} )(MainContentContainer);
+export default connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk} )(withAuthProfileComponent);

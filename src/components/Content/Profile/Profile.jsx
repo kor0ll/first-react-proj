@@ -1,7 +1,7 @@
 import s from "./Profile.module.css";
 import React from 'react';
 import userPic from '../../../assets/images/user.jpg';
-import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 function Profile(props) {
     
@@ -14,7 +14,9 @@ function Profile(props) {
                 <div className={s.wrapper}>
                     <p>{props.profile.fullName}</p>
                     <ul>
-                        <li>{props.profile.aboutMe}</li>
+                        <li>
+                            <ProfileStatus status={props.profile.aboutMe} />
+                        </li>
                         <li>Ищу работу? { props.profile.lookingForAJob ? "Конечно ищу" : "Та не, какая работа" }</li>
                     </ul>
                 </div>

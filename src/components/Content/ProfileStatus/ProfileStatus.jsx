@@ -32,12 +32,20 @@ class ProfileStatus extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status != this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
+
 
     render() {
         return <div>
 
             {!this.state.editMode && <div>
-                <span onDoubleClick={this.toggleEditMode}>{this.props.status}</span>
+                <span onDoubleClick={this.toggleEditMode}>{this.props.status || "-------------"}</span>
             </div>
             }
             {this.state.editMode && <div className={s.toggleStatusWrapper}>

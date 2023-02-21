@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect.jsx";
-import {addPost, updateNewPostText, getProfileThunk} from "../../redux/profileReducer";
+import {addPost, updateNewPostText, getProfileThunk, getStatusThunk, updateStatusThunk} from "../../redux/profileReducer";
 import MainContent from "./MainContent";
 
 class MainContentContainer extends React.Component {
@@ -12,10 +12,11 @@ class MainContentContainer extends React.Component {
     let userId = null;
     userId = document.location.pathname.slice(9);
     if (userId === "") {
-      userId = '2';
+      userId = '27749'; // мой айди
     }
 
     this.props.getProfileThunk(userId);
+    this.props.getStatusThunk(userId);
   }
 
   render = () => {
@@ -28,10 +29,11 @@ let mapStateToProps = (state) => {
     newPostText: state.profilePage.newPostText,
     profile: state.profilePage.profile,
     postsData: state.profilePage.postsData,
+    status: state.profilePage.status
   }
 }
 
 export default compose(
-  connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk}),
+  connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk, getStatusThunk, updateStatusThunk}),
   //withAuthRedirect
 )(MainContentContainer);

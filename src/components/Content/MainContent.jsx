@@ -12,7 +12,7 @@ function MainContent(props) {
   return (
     <div className={s.main_content}>
 
-      <Profile profile={props.profile} />
+      <Profile profile={props.profile} status={props.status} updateStatusThunk={props.updateStatusThunk}/>
       <Posts postsData={props.postsData}
         photo={props.profile.photos.small}
         addPost={props.addPost}

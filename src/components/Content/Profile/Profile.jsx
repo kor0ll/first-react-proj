@@ -15,7 +15,10 @@ function Profile(props) {
                     <p>{props.profile.fullName}</p>
                     <ul>
                         <li>
-                            <ProfileStatus status={props.profile.aboutMe} />
+                            {props.profile.aboutMe}
+                        </li>
+                        <li className={s.profileStatus}>
+                            <ProfileStatus status={props.status} updateStatusThunk={props.updateStatusThunk}/>
                         </li>
                         <li>Ищу работу? { props.profile.lookingForAJob ? "Конечно ищу" : "Та не, какая работа" }</li>
                     </ul>

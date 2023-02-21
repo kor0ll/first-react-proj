@@ -36,3 +36,8 @@
     width: 100%;
     max-height: 20rem;
   }
+
+.profileStatus {
+    background-color: #f5a7a7;
+    margin: 0.2rem 0;
+}

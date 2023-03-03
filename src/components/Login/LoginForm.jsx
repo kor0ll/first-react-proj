@@ -1,24 +1,29 @@
-import { useForm } from "react-hook-form"
 import React from "react";
-
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const LoginForm = (props) => {
-    const { register, handleSubmit } = useForm();
-
-    const onSubmit = (data) => {
-        console.log(data);
-    }
-
 
     return <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input placeholder="Логин" {...register("login")} />
-            <input placeholder="Пароль" {...register("password")} />
-            <div>
-                <input type="checkbox" {...register("rememberMe")} /> Запомнить меня
-            </div>
-            <input type="submit" />
-        </form>
+        <Formik
+       initialValues={{ login: '', password: '', rememberMe: false }}
+       onSubmit={(values, { setSubmitting }) => {
+           alert(JSON.stringify(values, null, 2));
+           setSubmitting(false);
+       }}
+     >
+       {({ isSubmitting }) => (
+         <Form>
+           <Field name="login" />
+           <Field type="password" name="password" />
+           <div>
+           <Field type="checkbox" name="rememberMe" /> Remember me
+           </div>
+           <button type="submit" disabled={isSubmitting}>
+             Login
+           </button>
+         </Form>
+       )}
+     </Formik>
     </div>
 }
 

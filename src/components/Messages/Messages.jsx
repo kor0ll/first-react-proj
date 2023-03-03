@@ -2,8 +2,7 @@ import s from "./Messages.module.css";
 import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
 import React from "react";
-import { Navigate } from "react-router-dom";
-
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const Messages = (props) => {
 
@@ -27,6 +26,8 @@ const Messages = (props) => {
             </div>
             <div className={s.messages}>
                 {props.messagesData.map((m) => <Message text={m.text} />)}
+
+
                 <div className={s.post_wrapper}>
                     <textarea cols="30" rows="10" placeholder="Напишите что-нибудь..." ref={textMessage}
                         onChange={updateMessageText} value={props.newMessageText}></textarea>
@@ -36,5 +37,33 @@ const Messages = (props) => {
         </div>
     )
 }
+
+
+const MessageForm = (props) => {
+
+
+    return (
+        <Formik
+       initialValues={{ message: ''}}
+       onSubmit={(values, { setSubmitting }) => {
+            props.addNewMessage();
+           alert(JSON.stringify(values, null, 2));
+           setSubmitting(false);
+       }}
+     >
+       {({ isSubmitting }) => (
+         <Form>
+           <Field type='textarea' name="message" ref={props.textMessage}
+                        onChange={props.updateMessageText} value={props.newMessageText}/>
+           <button type="submit" disabled={isSubmitting}>
+             Отправить
+           </button>
+         </Form>
+       )}
+     </Formik>
+    )
+}
+
+
 
 export default Messages;

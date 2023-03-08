@@ -12,8 +12,7 @@ let initialState = {
         { id: 3, text: 'Yoy' },
         { id: 4, text: 'Yo' },
         { id: 5, text: 'Oleg ti dolbaeb' },
-    ],
-    newMessageText: ''
+    ]
 };
 
 const messagesReducer = (state = initialState, action) => {
@@ -21,7 +20,7 @@ const messagesReducer = (state = initialState, action) => {
         case 'ADD-MESSAGE': {
             let message = {
                 id: state.messagesData.length + 1,
-                text: state.newMessageText
+                text: action.message
             };
             //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
             //а на новый объект
@@ -29,15 +28,6 @@ const messagesReducer = (state = initialState, action) => {
             stateCopy.messagesData = [...state.messagesData];
 
             stateCopy.messagesData.push(message);
-            stateCopy.newMessageText = '';
-            return stateCopy;
-        }
-        case 'UPDATE-NEW-MESSAGE-TEXT': {
-            //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
-            //а на новый объект
-            let stateCopy = {...state};
-
-            stateCopy.newMessageText = action.newText;
             return stateCopy;
         }
         default: {
@@ -47,19 +37,12 @@ const messagesReducer = (state = initialState, action) => {
 }
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
-export const addMessageAC = () => {
+export const addMessage = (message) => {
     let action = {
-        type: ADD_MESSAGE
+        type: ADD_MESSAGE,
+        message: message
     };
-    return action;
-}
-export const updateNewMessageTextAC = (text) => {
-    let action = {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newText: text
-    }
     return action;
 }
 

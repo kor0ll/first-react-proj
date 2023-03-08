@@ -1,4 +1,4 @@
-import {addMessageAC, updateNewMessageTextAC} from "../../redux/messagesReducer";
+import {addMessage} from "../../redux/messagesReducer";
 import React from "react";
 import Messages from "./Messages";
 import { connect } from "react-redux";
@@ -13,19 +13,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        addMessage: () => { 
-           return dispatch(addMessageAC()) 
-        },
-        updateNewMessageText: (text) => {
-            return dispatch(updateNewMessageTextAC(text)) 
-        }
-    }
-}
-
 const MessagesContainer = compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps, { addMessage }),
     withAuthRedirect
 )(Messages);
 

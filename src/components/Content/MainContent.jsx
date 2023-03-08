@@ -16,7 +16,6 @@ function MainContent(props) {
       <Posts postsData={props.postsData}
         photo={props.profile.photos.small}
         addPost={props.addPost}
-        updateNewPostText={props.updateNewPostText}
         newPostText={props.newPostText} />
     </div>
   )

@@ -1,7 +1,6 @@
 import { ProfileAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const GET_PROFILE = 'GET-PROFILE';
 
 const SET_STATUS = 'GET-STATUS';
@@ -10,10 +9,9 @@ const UPDATE_STATUS_TEXT = 'UPDATE-STATUS-TEXT';
 let initialState = {
     profile: null,
     postsData: [
-        { id: 1, message: "Hi, how are you?" },
-        { id: 2, message: "This is my first post!" }
+        { id: 1, message: "This is my first post!?" },
+        { id: 2, message: "This is my second post!" }
     ],
-    newPostText: "Write something",
     status: ''
 };
 
@@ -22,7 +20,7 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let post = {
                 id: state.postsData.length + 1,
-                message: state.newPostText
+                message: action.newText
             };
             //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
             //а на новый объект
@@ -30,15 +28,6 @@ const profileReducer = (state = initialState, action) => {
             stateCopy.postsData = [...state.postsData];
 
             stateCopy.postsData.push(post);
-            stateCopy.newPostText = "";
-            return stateCopy;
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            //выполняем поверхностную и глубокую копию state, чтобы вернуть не ссылку на тот же объект state (не перерисует тогда),
-            //а на новый объект
-            let stateCopy = {...state};
-
-            stateCopy.newPostText = action.newText;
             return stateCopy;
         }
         case GET_PROFILE: {
@@ -60,16 +49,10 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPost = () => {
+export const addPost = (newText) => {
     let action = {
-        type: ADD_POST
-    }
-    return action;
-}
-export const updateNewPostText = (text) => {
-    let action = {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
+        type: ADD_POST,
+        newText: newText
     }
     return action;
 }

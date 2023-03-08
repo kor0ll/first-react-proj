@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect.jsx";
-import {addPost, updateNewPostText, getProfileThunk, getStatusThunk, updateStatusThunk} from "../../redux/profileReducer";
+import {addPost, getProfileThunk, getStatusThunk, updateStatusThunk} from "../../redux/profileReducer";
 import MainContent from "./MainContent";
 
 class MainContentContainer extends React.Component {
@@ -26,7 +26,6 @@ class MainContentContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    newPostText: state.profilePage.newPostText,
     profile: state.profilePage.profile,
     postsData: state.profilePage.postsData,
     status: state.profilePage.status
@@ -34,6 +33,6 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-  connect(mapStateToProps, {addPost, updateNewPostText, getProfileThunk, getStatusThunk, updateStatusThunk}),
+  connect(mapStateToProps, {addPost, getProfileThunk, getStatusThunk, updateStatusThunk}),
   //withAuthRedirect
 )(MainContentContainer);

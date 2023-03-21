@@ -12,7 +12,7 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_DATA: {
-            let stateCopy = { ...state, ...action.data, isAuth: true };
+            let stateCopy = { ...state, ...action.data};
             return stateCopy;
         }
         default: {
@@ -21,11 +21,12 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserData = (id, email, login) => {
+export const setAuthUserData = (id, email, login, isAuth) => {
     let data = {
         id: id,
         email: email,
-        login: login
+        login: login,
+        isAuth: isAuth
     }
     let action = {
         type: SET_AUTH_DATA,
@@ -42,12 +43,37 @@ export const authMeThunk = () => {
                     let id = data.data.id;
                     let email = data.data.email;
                     let login = data.data.login;
-                    dispatch(setAuthUserData(id, email, login));
+                    dispatch(setAuthUserData(id, email, login, true));
                 }
-
             })
     }
 }
+
+export const loginThunk = (email, password, rememberMe, setStatus) => {
+    return (dispatch) => {
+        AuthAPI.login(email, password, rememberMe)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(authMeThunk());
+                }
+                else {
+                    setStatus(data.messages[0]);
+                }
+            })
+    }
+}
+
+export const logoutThunk = () => {
+    return (dispatch) => {
+        AuthAPI.logout()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData(null, null, null, false));
+                }
+            })
+    }
+}
+
 
 
 

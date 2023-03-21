@@ -4,7 +4,6 @@ let initialState = {
         { id: 2, name: 'Alina' },
         { id: 3, name: 'Maria' },
         { id: 4, name: 'Artem' },
-        { id: 5, name: 'Oleg' },
     ],
     messagesData: [
         { id: 1, text: 'Hi!' },

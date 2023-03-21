@@ -1,26 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { compose } from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect.jsx";
-import {addPost, getProfileThunk, getStatusThunk, updateStatusThunk} from "../../redux/profileReducer";
+import { addPost, getProfileThunk, getStatusThunk, updateStatusThunk } from "../../redux/profileReducer";
 import MainContent from "./MainContent";
 
 class MainContentContainer extends React.Component {
 
+
+  userId = null;
+
   componentDidMount = () => {
     //следующие 5 строчек - лично мой говнокод, потому что метод в уроке устарел и не работает
-    let userId = null;
-    userId = document.location.pathname.slice(9);
-    if (userId === "") {
-      userId = '27749'; // мой айди
-    }
+    this.userId = document.location.pathname.slice(9);
+    if (this.userId === "") {
+      this.userId = '27749'; // мой айди
 
-    this.props.getProfileThunk(userId);
-    this.props.getStatusThunk(userId);
+    }
+    if (!!this.userId) {
+      this.props.getProfileThunk(this.userId);
+      this.props.getStatusThunk(this.userId);
+    }
   }
 
+
   render = () => {
-    return <MainContent { ...this.props } />
+    this.userId = document.location.pathname.slice(9);
+    if (this.userId === "") {
+      if (!this.props.isAuth) {
+        return <Navigate to='/login' />
+      }
+    }
+    return <MainContent {...this.props} />
   }
 }
 
@@ -28,11 +40,12 @@ let mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
     postsData: state.profilePage.postsData,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    isAuth: state.auth.isAuth
   }
 }
 
 export default compose(
-  connect(mapStateToProps, {addPost, getProfileThunk, getStatusThunk, updateStatusThunk}),
+  connect(mapStateToProps, { addPost, getProfileThunk, getStatusThunk, updateStatusThunk }),
   //withAuthRedirect
 )(MainContentContainer);

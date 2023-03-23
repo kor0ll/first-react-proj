@@ -2,12 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { compose } from "redux";
-import withAuthRedirect from "../../hoc/withAuthRedirect.jsx";
 import { addPost, getProfileThunk, getStatusThunk, updateStatusThunk } from "../../redux/profileReducer";
 import MainContent from "./MainContent";
 
 class MainContentContainer extends React.Component {
-
 
   userId = null;
 
@@ -47,5 +45,4 @@ let mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, { addPost, getProfileThunk, getStatusThunk, updateStatusThunk }),
-  //withAuthRedirect
 )(MainContentContainer);

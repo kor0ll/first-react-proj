@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 
 let Posts = (props) => {
-
+    console.log('render!');
     let reversePostData = [ ...props.postsData ].reverse();
 
     return <div>

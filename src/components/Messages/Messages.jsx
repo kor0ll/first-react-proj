@@ -9,10 +9,10 @@ const Messages = (props) => {
     return (
         <div className={s.wrapper}>
             <div className={s.dialogs}>
-                {props.dialogsData.map((d) => <Dialog id={d.id} name={d.name} />)}
+                {props.dialogsData.map((d) => <Dialog id={d.id} name={d.name} key={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.messagesData.map((m) => <Message text={m.text} />)}
+                {props.messagesData.map((m) => <Message text={m.text} key={m.id}/>)}
                 <MessageForm  addMessage={props.addMessage}/>
             </div>
         </div>
